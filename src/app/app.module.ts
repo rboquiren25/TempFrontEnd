@@ -1,7 +1,7 @@
-import { DataService } from './services/data.service';
+import { AuthService } from './services/auth.service';
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './common/app-error-handler';
-import { XHRBackend, RequestOptions, Http } from '@angular/http';
+import { XHRBackend, RequestOptions, Http, HttpModule } from '@angular/http';
 import {ToastyModule} from 'ng2-toasty';
 import { UserService } from './services/user.service';
 import { NavmenuComponent } from './components/navmenu/navmenu.component';
@@ -14,6 +14,10 @@ import { HomeComponent } from './components/home/home.component';
 import { MdInputModule, MdButtonModule, MdCheckboxModule, MdMenuModule} from '@angular/material';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { UserListComponent } from './components/user/user-list/user-list.component';
+import { UserCreateComponent } from './components/user/user-create/user-create.component';
+import { UserEditComponent } from './components/user/user-edit/user-edit.component';
+
 
 
 @NgModule({
@@ -22,10 +26,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     NavmenuComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    UserListComponent,
+    UserCreateComponent,
+    UserEditComponent,
+
   ],
   imports: [
+    BrowserModule,
     FormsModule,
+    HttpModule,
     MdInputModule,
     MdButtonModule,
     MdCheckboxModule,
@@ -35,15 +45,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'user/login', component: LoginComponent},
+            { path: 'user/list', component: UserListComponent},
+            { path: 'user/create', component: UserCreateComponent},
+            { path: 'user/edit', component: UserEditComponent},
             { path: 'home', component: HomeComponent }
         ])
 
   ],
   providers: [
-        Http,
         UserService,
-        DataService,
-        {provide: ErrorHandler, useClass: AppErrorHandler}
+        AuthService
   ]
 })
 export class AppModule { }

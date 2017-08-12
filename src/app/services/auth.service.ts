@@ -2,7 +2,7 @@ import { HomeComponent } from './../components/home/home.component';
 import { AppComponent } from './../components/app/app.component';
 import { Injectable } from '@angular/core';
 import { Http, RequestOptions, Request, Headers, RequestMethod } from '@angular/http';
-import { tokenNotExpired, JwtHelper } from 'angular2-jwt'; 
+import { tokenNotExpired, JwtHelper } from 'angular2-jwt';
 import 'rxjs/add/operator/map';
 
 
@@ -10,47 +10,43 @@ import 'rxjs/add/operator/map';
 export class AuthService {
   currentUser: any;
   roles: string[] = [];
-  
+
 
   constructor(private http: Http) {
-    let token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
     if (token) {
-      let jwt = new JwtHelper();
+      const jwt = new JwtHelper();
       this.currentUser = jwt.decodeToken(token);
       this.roles = this.currentUser["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
 
     }
   }
 
-  login(credentials) { 
-    
-    let myHeaders = new Headers({'Content-Type':'application/x-www-form-urlencoded','Accept':'application/x-www-form-urlencoded',"cache-control": "no-cache"});
+  login(credentials) {
+    let myHeaders = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
     let options = new RequestOptions();
-    options.method= RequestMethod.Post;
-
+    options.method = RequestMethod.Post;
     options.headers = myHeaders;
-    let body = 'username='+credentials.username+'&password='+credentials.password;
-
-     return this.http.post('/user/login',body,options)
+    let body = 'username=' + credentials.username + '&password=' + credentials.password;
+     return this.http.post('http://localhost:5000/user/login', body, options)
       .map(response => {
-      let result = response.json();
-
+      const result = response.json();
+      console.log(result);
       if (result && result.token) {
         localStorage.setItem('token', result.token);
 
-        let jwt = new JwtHelper();
+        const jwt = new JwtHelper();
         this.currentUser = jwt.decodeToken(localStorage.getItem('token'));
 
-        return true; 
+        return true;
       }
-      
+
     });
-    
-    
+
 
   }
 
-  logout() { 
+  logout() {
     localStorage.removeItem('token');
     this.currentUser = null;
     this.roles = [];
