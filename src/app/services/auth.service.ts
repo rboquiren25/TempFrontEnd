@@ -55,14 +55,13 @@ export class AuthService {
   isLoggedIn() {
     let jwt = new JwtHelper();
     let token = localStorage.getItem('token');
-    if (!token) return false;
-    
+    if (!token) {return false; }
     let expirationDate = jwt.getTokenExpirationDate(token);
     let isExpired = jwt.isTokenExpired(token);
     return !isExpired;
   }
 
-  isInRole(RoleName){
+  isInRole(RoleName) {
     return this.roles.indexOf(RoleName) > -1;
   }
 

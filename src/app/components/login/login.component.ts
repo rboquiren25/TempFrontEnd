@@ -20,11 +20,9 @@ export class LoginComponent {
     this.AuthService.login(credential)
       .subscribe(result => {
         if (result) {
-          console.log(result);
-          
+          this.Router.navigate(['/']);
         }else {
           this.invalidLogin = true;
-          console.log(this.invalidLogin);
         }
       });
   }

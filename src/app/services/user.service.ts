@@ -6,9 +6,8 @@ import {HttpService} from './http.service';
 export class UserService extends DataService {
 
   constructor(http: HttpService) {
-    super('/api/users',http);
+    super('/api/users', http);
    }
-      
 }
 
 

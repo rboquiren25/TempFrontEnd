@@ -3,6 +3,7 @@
   <div class="panel-heading">Login</div>
   <div class="panel-body">
       <form class="form-signin" #f="ngForm" (ngSubmit)="logIn(f.value)">
+        <div *ngIf="invalidLogin" class="alert alert-danger">Invalid username and/or password.</div>
         <div><md-input-container><input type="text" name="username" ngModel mdInput placeholder="Username" required></md-input-container></div>
         <div><md-input-container><input type="password" name="password" ngModel mdInput placeholder="Password" required></md-input-container></div>
         <div style="text-align:right"><button md-raised-button type="submit">Login</button></div>
