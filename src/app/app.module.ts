@@ -1,7 +1,7 @@
 import { ErrorHandler } from '@angular/core';
 import { AppErrorHandler } from './common/app-error-handler';
 import { XHRBackend, RequestOptions, Http, HttpModule } from '@angular/http';
-import {ToastyModule} from 'ng2-toasty';
+import { ToastyModule, ToastyService } from 'ng2-toasty';
 import { UserService } from './services/user.service';
 import { AuthService } from './services/auth.service';
 import { HttpService } from './services/http.service';
@@ -18,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
-import { ConfirmComponent } from './components/confirm/confirm.component';
+import { ConfirmComponent } from './components/dialogs/confirm/confirm.component';
+import { SuccessComponent } from './components/dialogs/success/success.component';
+import { ErrorComponent } from './components/dialogs/error/error.component';
 
 
 
@@ -32,7 +34,9 @@ import { ConfirmComponent } from './components/confirm/confirm.component';
     UserListComponent,
     UserCreateComponent,
     UserEditComponent,
-    ConfirmComponent
+    ConfirmComponent,
+    SuccessComponent,
+    ErrorComponent
   ],
   entryComponents: [
     ConfirmComponent

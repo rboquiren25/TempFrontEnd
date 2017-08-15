@@ -41,6 +41,12 @@ export class DataService {
         .catch(this.handleError);
   }
 
+  delete(id) {
+    return this.http.get(this.url + '/delete?id=' + id)
+        .map(res => res.json())
+        .catch(this.handleError);
+  }
+
   shouldBeUnique(username) {
     return this.http.get(this.url + '/usernamevalidation?username=' + username);
   }

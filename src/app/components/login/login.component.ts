@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { Router } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
 import { user, role } from './../../models/user';
@@ -14,7 +15,8 @@ export class LoginComponent {
 
   constructor(
    private Router: Router,
-    private AuthService: AuthService) { }
+   private AuthService: AuthService,
+   private ToastyService: ToastyService) { }
 
   logIn(credential: any) {
     this.AuthService.login(credential)

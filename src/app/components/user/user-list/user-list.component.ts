@@ -1,4 +1,4 @@
-import { ConfirmComponent } from './../../confirm/confirm.component';
+import { ConfirmComponent } from './../../dialogs/confirm/confirm.component';
 import { UserService } from './../../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import {MdDialog, MdDialogRef} from '@angular/material';
@@ -23,8 +23,15 @@ users;
   deleteUser(id: number) {
      this.dialog.open(ConfirmComponent)
       .afterClosed().subscribe(result => {
-        console.log(result);
+        if (result) {
+            this.UserService.delete(id).subscribe(resultDel => {
+              if (resultDel) {
+                console.log('delete success');
+              } else {
+                console.log('bad request');
+              }
+            });
+        }
       });
-      console.log(id);
   }
 }
