@@ -1,3 +1,71 @@
-<p>
-  user-create works!
-</p>
+<form class="form-newuser form-horizontal" [formGroup]="user">
+  <h4>
+    Create New User
+  </h4> 
+  <hr>
+  <div class="form-group">
+    <label for="inputUsername" class="col-sm-2 control-label" >Username</label>
+    <div  class="col-sm-5">
+      <input type="text" id="inputUsername" formControlName="username"  class="form-control" placeholder="Username" required autofocus>
+    </div>  
+    <div class=" col-sm-4 " *ngIf="username.touched && username.invalid">
+      <div class="alert alert-danger" *ngIf="username.errors.required">this field is required</div>
+      <div class="alert alert-danger" *ngIf="username.errors.minlength">minimum Length 8</div>
+      <div class="alert alert-danger" *ngIf="username.errors.shouldBeUnique"> is already taken</div>
+      <div class="alert alert-danger" *ngIf="username.errors.pattern">Alphanumeric only</div>
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label for="inputPassword" class="col-sm-2 control-label" >Password</label>
+    <div  class="col-sm-5">
+      <input type="password" id="inputPassword" formControlName="password"  class="form-control" placeholder="Password" required autofocus>
+    </div>  
+    <div class=" col-sm-4 " *ngIf="password.touched && password.invalid">
+      <div class="alert alert-danger" *ngIf="password.errors.required">this field is required</div>
+      <div class="alert alert-danger" *ngIf="password.errors.minlength">minimum Length 8</div>
+      <div class="alert alert-danger" *ngIf="password.errors.pattern">Alphanumeric only</div>
+    </div>
+  </div>
+ 
+  
+  <div class="form-group">
+    <label for="inputEmail" class="col-sm-2 control-label" >Email Address</label>
+    <div  class="col-sm-5">
+      <input type="email" id="inputEmail" formControlName="email"  class="form-control" placeholder="Email Address" required autofocus>
+    </div>  
+     <div class=" col-sm-4 " *ngIf="email.touched && email.invalid">
+      <div class="alert alert-danger" *ngIf="email.errors.required">this field is required</div>
+      <div class="alert alert-danger" *ngIf="email.errors.minlength">minimum Length 8</div>
+      <div class="alert alert-danger" *ngIf="email.errors.pattern">not a valid email add</div>
+    </div>
+  </div>
+
+
+                                                                                                                                       
+ 
+    <div class="form-group">
+      <label class="col-sm-2 control-label" >Roles</label>
+      <div  class="col-sm-5">
+          <div formArrayName="roles" >
+            <div *ngFor="let r of roleList; let i=index" style="padding-left:20px;">
+              <input type="checkbox" name="{{r}}" (change)="updateRoles($event)" id="{{r}}" > <label for="{{r}}" style="font-weight:normal"> {{r}} </label>
+            </div>  
+          </div> 
+      </div>  
+      <div class=" col-sm-4 " *ngIf="roles.invalid">
+          <div class="alert alert-danger" *ngIf="roles.invalid">select atleast one role</div>
+      </div>
+    </div>  
+
+  <p class="text-right col-sm-3 col-sm-offset-4">
+    <button [disabled]="user.invalid" class="btn btn-primary" type="button" (click)="OnSubmit()" [md-dialog-close]="true" >Submit</button>
+    
+  </p>
+
+
+</form>
+
+ <!-- <div class="col-sm-3 col-sm-offset-4">
+{{userJson}}
+</div> -->

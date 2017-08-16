@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { MdInputModule, MdButtonModule, MdCheckboxModule, MdMenuModule, MdDialogModule } from '@angular/material';
 import { LoginComponent } from './components/login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { UserCreateComponent } from './components/user/user-create/user-create.component';
 import { UserEditComponent } from './components/user/user-edit/user-edit.component';
@@ -36,14 +36,20 @@ import { ErrorComponent } from './components/dialogs/error/error.component';
     UserEditComponent,
     ConfirmComponent,
     SuccessComponent,
-    ErrorComponent
+    ErrorComponent,
+    UserEditComponent
   ],
   entryComponents: [
-    ConfirmComponent
+    ConfirmComponent,
+    SuccessComponent,
+    ErrorComponent,
+    UserCreateComponent,
+    UserEditComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     MdInputModule,
     MdButtonModule,

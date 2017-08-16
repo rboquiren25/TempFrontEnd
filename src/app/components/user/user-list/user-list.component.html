@@ -1,5 +1,8 @@
 <div class="panel panel-default">
-  <div class="panel-heading">Users</div>
+  <div class="panel-heading">
+    <span style="margin-right:20px;">Users </span>
+    <button class="md-button md-small" md-raised-button (click)="createUser()">Create new user </button>
+  </div>
   <div class="panel-body">
       <table class="table table-hover table-condensed">
         <thead>
@@ -15,7 +18,7 @@
         <tbody>
             <tr *ngFor="let u of users; let n = index">
               <td>{{n + 1}}.</td>
-              <td> <a [routerLink]="['/user', 'edit', u.id]"> {{u.username}} </a></td>
+              <td> <span style="text-decoration:underline; cursor:pointer;" (click)="editUser(u.id)"> {{u.username}} </span></td>
               <td>{{u.email}}</td>
               <td>
                   <span *ngFor="let r of u.roles; let i = index"> {{r.roleName}}<span *ngIf="i < (u.roles.length - 1)">, </span> </span>
