@@ -1,5 +1,5 @@
 import { UserEditComponent } from './../user-edit/user-edit.component';
-import { user } from './../../../models/user';
+import { User } from './../../../models/user';
 import { Router } from '@angular/router';
 import { UserCreateComponent } from './../user-create/user-create.component';
 import { SuccessComponent } from './../../dialogs/success/success.component';
@@ -21,12 +21,15 @@ users;
   ngOnInit() {
     this.UserService.getAll().subscribe(users => {
       this.users = users;
-      console.log(this.users);
     });
   }
 
+
   deleteUser(id: number) {
-     this.dialog.open(ConfirmComponent)
+     this.dialog.open(ConfirmComponent, {
+       width: '220px',
+       height: '150px',
+     })
       .afterClosed().subscribe(result => {
         if (result) {
             this.UserService.delete(id).subscribe(resultDel => {
@@ -46,10 +49,10 @@ users;
       });
   }
 
-  createUser() {
+  createUserOld() {
     this.dialog.open(UserCreateComponent, {
       width: '700px',
-      height: '400px'
+      height: '400px',
     }).afterClosed().subscribe(result => {
         this.UserService.getAll().subscribe(users => {
           this.users = users;
@@ -57,11 +60,30 @@ users;
       });
   }
 
+  createUser() {
+    let newuser: User  =  {
+      id: 0,
+      username: '',
+      password: '',
+      email: '',
+      roles: [],
+      scopes: []
+    };
+    this.dialog.open(UserCreateComponent, {
+      width: '380px',
+      height: 'auto',
+      data: newuser
+    }).afterClosed().subscribe( result => {
+      newuser = result;
+      console.log(JSON.stringify(newuser));
+    });
+  }
+
   editUser(id: number) {
     this.dialog.open(UserEditComponent, {
       data: {id: id},
-      width: '700px',
-      height: '400px'
+      width: '550px',
+      height: '330px'
     }).afterClosed().subscribe(result => {
         this.UserService.getAll().subscribe(users => {
           this.users = users;

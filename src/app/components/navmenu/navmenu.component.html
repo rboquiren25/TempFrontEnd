@@ -15,68 +15,21 @@
          <li>   <a [routerLink]="['/home']"> <b class="glyphicon glyphicon-home"></b>  Home</a></li>
           <li><a href="#">Link</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrator <b class="caret"></b></a> 
+            <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer; user-select: none;">Administrator <b class="caret"></b></a> 
             <ul class="dropdown-menu">
           
               <li >
                   <a [routerLink]="['/user/list']">   Users </a>
                 
               </li>
-              <li class="dropdown dropdown-submenu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown Link 5</a>
-                <ul class="dropdown-menu">
-                  <li class="kopie"><a href="#">Dropdown Link 5</a></li>
-                  <li><a href="#">Dropdown Submenu Link 5.1</a></li>
-                  <li><a href="#">Dropdown Submenu Link 5.2</a></li>
-                  <li><a href="#">Dropdown Submenu Link 5.3</a></li>
-                  <li class="dropdown dropdown-submenu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown Submenu Link 5.4</a>
-                    <ul class="dropdown-menu">
-                      <li class="kopie"><a href="#">Dropdown Submenu Link 5.4</a></li>
-                      <li><a href="#">Dropdown Submenu Link 5.4.1</a></li>
-                      <li><a href="#">Dropdown Submenu Link 5.4.2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
+              <li >
+                <a [routerLink]="['/location/list']">   Locations </a>
+              
+            </li>
+         
             </ul>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown2 <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-              <li class="kopie"><a href="#">Dropdown2</a></li>
-              <li><a href="#">Dropdown2 Link 1</a></li>
-              <li><a href="#">Dropdown2 Link 2</a></li>
-              <li><a href="#">Dropdown2 Link 3</a></li>
-              <li class="dropdown dropdown-submenu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown2 Link 4</a>
-                <ul class="dropdown-menu">
-                  <li class="kopie"><a href="#">Dropdown2 Link 4</a></li>
-                  <li><a href="#">Dropdown2 Submenu Link 4.1</a></li>
-                  <li><a href="#">Dropdown2 Submenu Link 4.2</a></li>
-                  <li><a href="#">Dropdown2 Submenu Link 4.3</a></li>
-                  <li><a href="#">Dropdown2 Submenu Link 4.4</a></li>
-                </ul>
-              </li>
-              <li class="dropdown dropdown-submenu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown2 Link 5</a>
-                <ul class="dropdown-menu">
-                  <li class="kopie"><a href="#">Dropdown Link 5</a></li>
-                  <li><a href="#">Dropdown2 Submenu Link 5.1</a></li>
-                  <li><a href="#">Dropdown2 Submenu Link 5.2</a></li>
-                  <li><a href="#">Dropdown2 Submenu Link 5.3</a></li>
-                  <li class="dropdown dropdown-submenu">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown Submenu Link 5.4</a>
-                    <ul class="dropdown-menu">
-                      <li class="kopie"><a href="#">Dropdown2 Submenu Link 5.4</a></li>
-                      <li><a href="#">Dropdown2 Submenu Link 5.4.1</a></li>
-                      <li><a href="#">Dropdown2 Submenu Link 5.4.2</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
+        
           
         </ul>
         <ul class="nav navbar-nav navbar-right">

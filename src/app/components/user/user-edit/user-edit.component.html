@@ -1,9 +1,38 @@
-<form class="form-edituser">
-    <h4>
-        Edit User
-    </h4> 
-    <hr>
-</form>
-<div class="col-sm-3 col-sm-offset-4">
-    {{userJson}}
+<i class="material-icons md-36" style="vertical-align:bottom">face</i> <h4 style="display:inline">Edit User </h4>
+<hr>
+
+<form class="form-edituser form-horizontal" >
+  
+    <div class="form-group">
+            <label  class="col-sm-2 control-label" style="padding-top:0px" >Username</label>
+            <div  class="col-sm-10" style="vertical-align:bottom">
+              {{username}}
+            </div> 
     </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label" style="padding-top:0px" >Password</label>
+        <div  class="col-sm-10" style="vertical-align:bottom">
+          {{password}}
+        </div>  
+    </div>
+    <div class="form-group">
+        <label for="inputEmail" class="col-sm-2 control-label" style="padding-top:0px" >Email</label>
+        <div  class="col-sm-5" style="vertical-align:bottom">
+            <input [(ngModel)]="user.email" type="text" class="form-control" name="email" >
+        </div>
+    </div>
+    <div class="form-group">
+        <label  class="col-sm-2 control-label" style="padding-top:0px" >Roles</label>
+        <div class="col-sm-5" style="vertical-align:bottom">
+            <div *ngFor="let r of roleList; let i=index" style="padding-left:20px;">
+                <input type="checkbox" name="{{r}}" [checked]="checkRole(r)" (change)="updateRoles($event)" id="{{r}}" > <label> {{r}} </label>
+              </div>  
+        </div>
+    </div>
+    <p class="text-right col-sm-2 col-sm-offset-10">
+        <button [disabled]="roles.length < 1 || email === ''" class="btn btn-primary" type="button" (click)="OnSubmit()" [md-dialog-close]="true" >Submit</button>
+        
+      </p>
+</form>
+
+

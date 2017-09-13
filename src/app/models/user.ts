@@ -1,18 +1,24 @@
 
-export interface KeyValuePair { 
-  id: number; 
-  name: string; 
+export interface KeyValuePair {
+  id: number;
+  name: string;
 }
 
-export interface user {
-  id: number; 
+export interface User {
+  id: number;
   username: string;
   password: string;
   email: string;
-  roles: role[];
+  roles: Role[];
+  scopes: Scope[];
 }
 
-export interface role {
+export interface Role {
   id: number;
-  rolename: string
+  roleName: string;
+}
+
+export interface Scope {
+  id: number;
+  name: string;
 }

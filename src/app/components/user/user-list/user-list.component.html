@@ -1,11 +1,11 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <span style="margin-right:20px;">Users </span>
-    <button class="md-button md-small" md-raised-button (click)="createUser()">Create new user </button>
+    <i class="material-icons md-36" style="vertical-align:bottom">group</i><span style="margin-right:10px;vertical-align:bottom">  Users </span>
+    <button class="md-button" md-raised-button (click)="createUser()"> <i class="material-icons">create</i> Create new user </button>
   </div>
   <div class="panel-body">
       <table class="table table-hover table-condensed">
-        <thead>
+        <thead style="font-weight:bold">
             <tr>
               <td>No.</td>
               <td>Username.</td>
@@ -18,13 +18,13 @@
         <tbody>
             <tr *ngFor="let u of users; let n = index">
               <td>{{n + 1}}.</td>
-              <td> <span style="text-decoration:underline; cursor:pointer;" (click)="editUser(u.id)"> {{u.username}} </span></td>
+              <td> <span  style="cursor:pointer;color:#3F51B5" (click)="editUser(u.id)"> {{u.username}} </span></td>
               <td>{{u.email}}</td>
               <td>
                   <span *ngFor="let r of u.roles; let i = index"> {{r.roleName}}<span *ngIf="i < (u.roles.length - 1)">, </span> </span>
               </td>
               <td>{{u.password}}</td>
-              <td style="text-align:center" ><button class="md-button md-small" md-button (click)="deleteUser(u.id)">Delete </button> </td>
+              <td style="text-align:center;"  ><span  style="cursor:pointer;" (click)="deleteUser(u.id)"> <i style="color:#F44336" class="material-icons">close</i> </span> </td>
             </tr>
         </tbody>
       </table>

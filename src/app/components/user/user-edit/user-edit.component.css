@@ -3,3 +3,20 @@
     padding: 12px;
     margin: 0 auto;
   }
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948;
+} 
+  
+
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; 
+}
+
+.alert {
+   margin-bottom: 1px;
+  height: 30px;
+  line-height:30px;
+  padding:0px 15px;
+}
+

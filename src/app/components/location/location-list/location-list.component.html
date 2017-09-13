@@ -1,0 +1,29 @@
+<ng2-toasty [position]="'top-right'" ></ng2-toasty>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <i class="material-icons md-36" style="vertical-align:bottom">language</i><span style="margin-right:10px;vertical-align:bottom">  Locations </span>
+    <button class="md-button" md-raised-button (click)="createLocation()"> <i class="material-icons">create</i> Create new location </button>
+  </div>
+  <div class="panel-body">
+      <table class="table table-hover table-condensed">
+        <thead style="font-weight:bold">
+            <tr>
+              <td>No.</td>
+              <td>Location</td>
+              <td>Location ID</td>
+              
+              <td style="text-align:center" >Action</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let l of locations; let n = index">
+              <td>{{n + 1}}.</td>
+              <td> <span  style="cursor:pointer;color:#3F51B5" (click)="editLocation(l.id)"> {{l.name}} </span></td>
+              <td>{{l.id}}</td>
+              <td style="text-align:center;"  ><span  style="cursor:pointer;" (click)="deleteLocation(l.id)"> <i style="color:#F44336" class="material-icons">close</i> </span> </td>
+            </tr>
+        </tbody>
+      </table>
+  </div>
+</div>

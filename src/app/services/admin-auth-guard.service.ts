@@ -1,17 +1,22 @@
-import { AuthGuard } from './auth-guard.service';
 import { AuthService } from './auth.service';
+import { CanActivate, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from "@angular/router";
 
 @Injectable()
-export class AdminAuthGuard extends AuthGuard {
+export class AdminAuthGuard implements CanActivate {
 
-  constructor(authService: AuthService, router: Router) {
-    super(authService,router);
-   }
+  constructor (
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-  canActivate(){
-      var isLoggedIn = super.canActivate();
-      return isLoggedIn ? this.authService.isInRole('Administrator') : false;
+  canActivate() {
+    console.log(this.authService.isAdmin());
+    if (this.authService.isAdmin()) {
+      return true;
     }
+    this.router.navigate(['/no-access']);
+    return false;
+  }
+
 }

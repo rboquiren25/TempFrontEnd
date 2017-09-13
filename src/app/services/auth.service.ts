@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HomeComponent } from './../components/home/home.component';
 import { AppComponent } from './../components/app/app.component';
 import { Injectable } from '@angular/core';
@@ -11,24 +12,22 @@ export class AuthService {
   currentUser: any;
   roles: string[] = [];
 
-
-  constructor(private http: Http) {
+  constructor(private http: Http, private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       const jwt = new JwtHelper();
       this.currentUser = jwt.decodeToken(token);
       this.roles = this.currentUser["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
-
     }
   }
 
   login(credentials) {
-    let myHeaders = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
-    let options = new RequestOptions();
+    const myHeaders = new Headers({'Content-Type': 'application/x-www-form-urlencoded'});
+    const options = new RequestOptions();
     options.method = RequestMethod.Post;
     options.headers = myHeaders;
-    let body = 'username=' + credentials.username + '&password=' + credentials.password;
-     return this.http.post('http://localhost:5000/user/login', body, options)
+    const body = 'username=' + credentials.username + '&password=' + credentials.password;
+     return this.http.post('http://localhost:5000/login', body, options)
       .map(response => {
       const result = response.json();
       console.log(result);
@@ -37,7 +36,6 @@ export class AuthService {
 
         const jwt = new JwtHelper();
         this.currentUser = jwt.decodeToken(localStorage.getItem('token'));
-
         return true;
       }
 
@@ -50,19 +48,29 @@ export class AuthService {
     localStorage.removeItem('token');
     this.currentUser = null;
     this.roles = [];
+    this.router.navigate(['/user/login']);
   }
 
   isLoggedIn() {
-    let jwt = new JwtHelper();
-    let token = localStorage.getItem('token');
+    const jwt = new JwtHelper();
+    const token = localStorage.getItem('token');
     if (!token) {return false; }
-    let expirationDate = jwt.getTokenExpirationDate(token);
-    let isExpired = jwt.isTokenExpired(token);
+    const expirationDate = jwt.getTokenExpirationDate(token);
+    const isExpired = jwt.isTokenExpired(token);
     return !isExpired;
   }
 
-  isInRole(RoleName) {
-    return this.roles.indexOf(RoleName) > -1;
+  isAdmin() {
+    const jwt = new JwtHelper();
+    const token = localStorage.getItem('token');
+    const user = jwt.decodeToken(token);
+    let roles:  string[] = [];
+    roles = user["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+
+    if (roles.includes('Administrator')) {
+      return true;
+    }
+    return false;
   }
 
 

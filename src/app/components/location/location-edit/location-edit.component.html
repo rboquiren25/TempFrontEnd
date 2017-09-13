@@ -1,0 +1,16 @@
+<i class="material-icons md-36" style="vertical-align:bottom">language</i> <h4 style="display:inline">Edit Location </h4>
+<hr>
+
+<form class="form-editlocation form-horizontal" >
+  
+    <div class="form-group">
+        <label for="inputEmail" class="col-sm-3 control-label" style="padding-top:0px" >Location Name</label>
+        <div  class="col-sm-5" style="vertical-align:bottom">
+            <input [(ngModel)]="data.name" type="text" class="form-control" name="name" >
+        </div>
+    </div>
+  
+    <p class="text-right col-sm-2 col-sm-offset-10">
+      <button class="btn btn-primary" type="button" [md-dialog-close]="data" >Submit</button>
+      </p>
+</form>

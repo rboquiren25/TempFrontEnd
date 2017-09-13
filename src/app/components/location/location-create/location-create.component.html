@@ -1,0 +1,18 @@
+
+
+<form class="form-newlocation">
+    <h4>
+        Create New Location
+    </h4> <hr>
+    <div class="form-group">
+        <label for="inputLocationname" class="col-sm-2 control-label" >Location</label>
+        <div  class="col-sm-5">
+            <input [(ngModel)]="data.name" type="text" class="form-control" name="name" >
+        </div>  
+      </div>
+      <p class="text-right col-sm-3 col-sm-offset-9">
+          <button class="btn btn-primary" type="button" [md-dialog-close]="data" >Submit</button>
+      </p>
+      
+</form>
+
