@@ -1,3 +1,5 @@
+import { LogService } from './services/log.service';
+import { RoleService } from './services/role.service';
 import { LocationService } from './services/location.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { AuthGuard } from './services/auth-guard.service';
@@ -28,6 +30,7 @@ import { LocationListComponent } from './components/location/location-list/locat
 import { NoAccessComponent } from './components/no-access/no-access.component';
 import { LocationCreateComponent } from './components/location/location-create/location-create.component';
 import { LocationEditComponent } from './components/location/location-edit/location-edit.component';
+import { UserChangepassComponent } from './components/user/user-changepass/user-changepass.component';
 
 
 @NgModule({
@@ -47,7 +50,8 @@ import { LocationEditComponent } from './components/location/location-edit/locat
     LocationListComponent,
     NoAccessComponent,
     LocationCreateComponent,
-    LocationEditComponent
+    LocationEditComponent,
+    UserChangepassComponent
   ],
   entryComponents: [
     ConfirmComponent,
@@ -75,10 +79,11 @@ import { LocationEditComponent } from './components/location/location-edit/locat
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'user/login', component: LoginComponent},
             { path: 'user/list', component: UserListComponent, canActivate: [AuthGuard, AdminAuthGuard] },
-            { path: 'user/create', component: UserCreateComponent, canActivate: [AuthGuard] },
-            { path: 'user/edit/:id', component: UserEditComponent, canActivate: [AuthGuard] },
-            { path: 'location/list', component: LocationListComponent},
-            { path: 'location/create', component: LocationCreateComponent},
+            { path: 'user/create', component: UserCreateComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+            { path: 'user/edit/:id', component: UserEditComponent, canActivate: [AuthGuard, AdminAuthGuard] },
+            { path: 'user/changepass', component: UserChangepassComponent, canActivate: [AuthGuard] },
+            { path: 'location/list', component: LocationListComponent, canActivate: [AuthGuard, AdminAuthGuard]},
+            { path: 'location/create', component: LocationCreateComponent, canActivate: [AuthGuard, AdminAuthGuard]},
             { path: 'no-access', component: NoAccessComponent},
             { path: 'home', component: HomeComponent }
         ])
@@ -90,7 +95,9 @@ import { LocationEditComponent } from './components/location/location-edit/locat
         AuthService,
         AuthGuard,
         AdminAuthGuard,
-        LocationService
+        LocationService,
+        RoleService,
+        LogService
   ]
 })
 export class AppModule { }

@@ -1,3 +1,4 @@
+<ng2-toasty [position]="'top-right'" ></ng2-toasty>
 <div class="panel panel-default">
   <div class="panel-heading">
     <i class="material-icons md-36" style="vertical-align:bottom">group</i><span style="margin-right:10px;vertical-align:bottom">  Users </span>
@@ -11,6 +12,7 @@
               <td>Username.</td>
               <td>Email.</td>
               <td>Roles</td>
+              <td>Scopes</td>
               <td>Password</td>
               <td style="text-align:center" >Action</td>
             </tr>
@@ -22,6 +24,9 @@
               <td>{{u.email}}</td>
               <td>
                   <span *ngFor="let r of u.roles; let i = index"> {{r.roleName}}<span *ngIf="i < (u.roles.length - 1)">, </span> </span>
+              </td>
+              <td>
+                <span *ngFor="let s of u.scopes; let i = index"> {{s.name}}<span *ngIf="i < (u.scopes.length - 1)">, </span> </span>
               </td>
               <td>{{u.password}}</td>
               <td style="text-align:center;"  ><span  style="cursor:pointer;" (click)="deleteUser(u.id)"> <i style="color:#F44336" class="material-icons">close</i> </span> </td>

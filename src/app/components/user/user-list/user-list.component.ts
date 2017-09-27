@@ -1,3 +1,5 @@
+import { ToastyService } from 'ng2-toasty';
+import { element } from 'protractor';
 import { UserEditComponent } from './../user-edit/user-edit.component';
 import { User } from './../../../models/user';
 import { Router } from '@angular/router';
@@ -15,7 +17,7 @@ import {MdDialog, MdDialogRef} from '@angular/material';
 })
 export class UserListComponent implements OnInit {
 users;
-  constructor(private UserService: UserService, public dialog: MdDialog, private router: Router) { }
+  constructor(private UserService: UserService, public dialog: MdDialog, private router: Router , private ToastyService: ToastyService) { }
 
 
   ngOnInit() {
@@ -70,23 +72,46 @@ users;
       scopes: []
     };
     this.dialog.open(UserCreateComponent, {
-      width: '380px',
+      width: '450px',
       height: 'auto',
       data: newuser
     }).afterClosed().subscribe( result => {
       newuser = result;
-      console.log(JSON.stringify(newuser));
+      if (newuser) {
+        this.UserService.create(newuser).subscribe( result => {
+          if ( result) {
+            this.UserService.getAll().subscribe(users => {
+              this.users = users;
+            });
+            this.ToastyService.success({
+              title: 'Success!',
+              msg: 'New user created',
+              theme: 'bootstrap',
+              showClose: true,
+              timeout: 5000
+            });
+          }
+        });
+      }
     });
   }
 
   editUser(id: number) {
     this.dialog.open(UserEditComponent, {
       data: {id: id},
-      width: '550px',
-      height: '330px'
+      width: '450px',
+      height: 'auto'
     }).afterClosed().subscribe(result => {
-        this.UserService.getAll().subscribe(users => {
-          this.users = users;
+        this.UserService.update(result).subscribe(updtduser => {
+          if (updtduser) {
+            this.ToastyService.success({
+              title: 'Success!',
+              msg: 'User update',
+              theme: 'bootstrap',
+              showClose: true,
+              timeout: 5000
+            });
+          }
         });
       });
   }

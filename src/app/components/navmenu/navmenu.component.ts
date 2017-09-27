@@ -10,6 +10,4 @@ export class NavmenuComponent {
 
   constructor(private authService: AuthService) { }
 
-
-
 }

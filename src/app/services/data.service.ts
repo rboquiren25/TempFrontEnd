@@ -51,6 +51,12 @@ export class DataService {
     return this.http.get(this.url + '/usernamevalidation?username=' + username);
   }
 
+  changePassword(resource) {
+    return this.http.post(this.url + '/changepassword', resource)
+    .map(res => res.json())
+    .catch(this.handleError);
+  }
+
   private handleError(error: Response) {
       if (error.status === 400) { return Observable.throw(new Error400(error.json)); }
       if (error.status === 404) { return Observable.throw(new Error404()); }

@@ -1,0 +1,26 @@
+<ng2-toasty [position]="'top-right'" ></ng2-toasty>
+<form class="form-changepass form-horizontal" name="form-changepass">
+  <i class="material-icons md-36" style="vertical-align:bottom">lock</i>    Change Password
+  <hr>
+  <div class="form-group">
+    <label class="col-sm-4 control-label" >Old Password</label>
+    <div  class="col-sm-8">
+      <input  type="password" [(ngModel)]="changepass.oldpassword" [ngClass]="{'invalid': changepass.oldpassword.length < 8, 'valid': changepass.oldpassword.length >= 8}"  class="form-control" name="oldpassword" required minlength="8">
+    </div>  
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label" >New Password</label>
+    <div  class="col-sm-8">
+      <input  type="password" [(ngModel)]="changepass.newpassword" [ngClass]="{'invalid': !emailEqual, 'valid': emailEqual}" class="form-control" name="newpassword" required minlength="8">
+    </div>  
+  </div>
+  <div class="form-group">
+    <label class="col-sm-4 control-label" >Confirm Password</label>
+    <div  class="col-sm-8">
+      <input  type="password" [(ngModel)]="changepass.confirmpassword" [ngClass]="{'invalid': !emailEqual, 'valid': emailEqual}"  class="form-control" name="confirmpassword" required minlength="8">
+    </div>  
+  </div>
+  <div class="right col-sm-3 col-sm-offset-9" class="form-group" style="text-align:right;padding-right:20px;">
+    <button  [disabled]="!validate" class="btn btn-primary" type="button" (click)="OnSubmit()"> Submit </button>
+  </div>
+</form>

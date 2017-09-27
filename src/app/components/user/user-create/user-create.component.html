@@ -1,35 +1,48 @@
 
-<form class="form-newUser form-horizontal">
-  <h4>
-      Create New User
-  </h4> <hr>
+<form class="form-newUser form-horizontal" [formGroup]="user">
+    <i class="material-icons md-36" style="vertical-align:bottom">face</i>    Create New User
+   <hr>
   <div class="form-group">
       <label class="col-sm-3 control-label" >Username</label>
       <div  class="col-sm-9">
-        <input [(ngModel)]="data.username" type="text" class="form-control" name="username" >
+        <input [(ngModel)]="data.username" formControlName="username" type="text" class="form-control" name="username" required >
       </div>  
   </div>
 
   <div class="form-group">
     <label class="col-sm-3 control-label" >Password</label>
     <div  class="col-sm-9">
-      <input [(ngModel)]="data.password" type="text" class="form-control" name="password" >
+      <input [(ngModel)]="data.password" formControlName="password" type="text" class="form-control" name="password" required>
     </div>  
   </div>
   
   <div class="form-group">
     <label class="col-sm-3 control-label" >Email</label>
     <div  class="col-sm-9">
-      <input [(ngModel)]="data.email" type="text" class="form-control" name="email" >
+      <input [(ngModel)]="data.email" formControlName="email" type="email" class="form-control" name="email" required >
     </div>  
   </div>  
+    <div class="form-group">
+      <div class="col-sm-3"></div>
+      <div class="form-group col-sm-9">
+        <div class="col-sm-6">
+            <div style="padding-left:17px;font-weight:bold">Roles</div>
+            <div *ngFor="let r of roles; let i=index" style="padding-left:20px;">
+                <input type="checkbox" name="{{r.name}}"  (change)="updateRoles($event)" id="{{r.name}}" > <label for="{{r.name}}" style="font-weight:normal"> {{r.name}} </label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div style="padding-left:17px;font-weight:bold">Scopes</div>
+          <div *ngFor="let s of scopes; let i=index" style="padding-left:20px;">
+              <input type="checkbox" name="{{s.name}}" (change)="updateScope($event)" id="{{s.name}}" > <label for="{{s.name}}" style="font-weight:normal"> {{s.name}} </label>
+          </div>  
+        </div>
+    </div>
+</div>
 
-  <div *ngFor="let s of scopes; let i=index" style="padding-left:20px;">
-    <input type="checkbox" name="{{s.name}}" id="{{s.name}}" > <label for="{{s.name}}" style="font-weight:normal"> {{s.name}} </label>
-  </div>  
-
-  <p class="text-right col-sm-3 col-sm-offset-9">
-    <button class="btn btn-primary" type="button" [md-dialog-close]="data" >Submit</button>
-  </p>
+  <div class="right col-sm-3 col-sm-offset-9" class="form-group" style="text-align:right;padding-right:20px;">
+    <button  class="btn btn-info" type="button" [md-dialog-close] >Cancel</button>
+    <button [disabled]="user.invalid || data.roles.length < 1 || data.scopes.length < 1" class="btn btn-primary" type="button" [md-dialog-close]="data" >Submit</button>
+  </div>
 
 </form>

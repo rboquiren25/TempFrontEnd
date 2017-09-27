@@ -1,7 +1,9 @@
+import { HttpService } from './../../services/http.service';
+import { LogService } from './../../services/log.service';
 import { ToastyService } from 'ng2-toasty';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from './../../services/auth.service';
-import { User, Role } from './../../models/user';
+import { User, Role, LoginLog } from './../../models/user';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, FormArray} from '@angular/forms';
 
@@ -12,12 +14,14 @@ import { FormGroup, FormControl, Validators, AbstractControl, FormArray} from '@
 })
 export class LoginComponent {
   invalidLogin: boolean;
+  loginlog: LoginLog;
 
   constructor(
    private Router: Router,
    private route: ActivatedRoute,
    private AuthService: AuthService,
-   private ToastyService: ToastyService) { }
+   private ToastyService: ToastyService,
+   private logservice: LogService) { }
 
   logIn(credential: any) {
     this.AuthService.login(credential)

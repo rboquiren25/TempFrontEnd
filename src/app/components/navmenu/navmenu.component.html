@@ -36,9 +36,21 @@
           <li *ngIf="!authService.isLoggedIn()">
               <a [routerLink]="['/user/login']"> <b class="glyphicon glyphicon-user"></b>  Login</a>
           </li>
-          <li *ngIf="authService.isLoggedIn()" >
-              <a (click)="authService.logout()" > <b class="glyphicon glyphicon-user"></b>  Logout</a>
-          </li>
+          <li class="dropdown" *ngIf="authService.isLoggedIn()" >
+              <a class="dropdown-toggle" data-toggle="dropdown" style="cursor:pointer; user-select: none;">  <b class="glyphicon glyphicon-user"></b> {{authService.userName}} <b class="caret"></b></a> 
+              <ul class="dropdown-menu">
+            
+                <li >
+                  <a (click)="authService.logout()" >  Logout</a>
+                  
+                </li>
+                <li >
+                  <a [routerLink]="['/user/changepass']">   Change Password </a>
+                
+              </li>
+          
+              </ul>
+            </li>
        </ul>
       </div>
     </div>

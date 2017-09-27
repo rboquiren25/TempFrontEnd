@@ -1,3 +1,4 @@
+import { HttpService } from './http.service';
 import { Router } from '@angular/router';
 import { HomeComponent } from './../components/home/home.component';
 import { AppComponent } from './../components/app/app.component';
@@ -12,7 +13,7 @@ export class AuthService {
   currentUser: any;
   roles: string[] = [];
 
-  constructor(private http: Http, private router: Router) {
+  constructor(private http: Http, private router: Router, private httpservice: HttpService) {
     const token = localStorage.getItem('token');
     if (token) {
       const jwt = new JwtHelper();
@@ -30,7 +31,6 @@ export class AuthService {
      return this.http.post('http://localhost:5000/login', body, options)
       .map(response => {
       const result = response.json();
-      console.log(result);
       if (result && result.token) {
         localStorage.setItem('token', result.token);
 
@@ -73,6 +73,18 @@ export class AuthService {
     return false;
   }
 
+  get userName() {
+    return this.currentUser.sub;
+  }
+
+  get ipAdd()
+  {
+     let ip: string;
+     this.httpservice.get('http://smart-ip.net/geoip-json?callback=?').subscribe(response => {
+     console.log(response);
+     ip = response.toString(); });
+     return ip;
+  }
 
 }
 

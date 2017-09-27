@@ -22,3 +22,10 @@ export interface Scope {
   id: number;
   name: string;
 }
+
+export interface LoginLog {
+  id: number;
+  date: string;
+  ipaddress: string;
+  name: string;
+}
